@@ -3,167 +3,94 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>乡旅安 · 乡村旅游安全系统</title>
-    <link rel="stylesheet" href="styles/base.css" />
-    <link rel="stylesheet" href="styles/layout.css" />
-    <link rel="stylesheet" href="styles/components.css" />
-    <link rel="stylesheet" href="styles/pages.css" />
+    <title>安农帮 · 乡村安全管理后台</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="app-shell">
-      <header class="top-bar card">
-        <div>
-          <p class="eyebrow">智慧文旅 · 安全先行</p>
-          <h1>乡旅安</h1>
-          <p class="subtitle">乡村旅游安全综合指挥平台（前端完整流程演示）</p>
-        </div>
-        <div class="header-actions">
-          <button id="themeToggle" class="btn btn-ghost">夜间模式</button>
-          <button id="notifyBtn" class="btn btn-ghost">通知中心</button>
-        </div>
-      </header>
+    <div class="dashboard-layout">
+      <aside class="sidebar">
+        <div class="logo">安农帮</div>
+        <p class="logo-subtitle">Rural Safety Admin</p>
+        <nav class="menu" aria-label="主导航">
+          <a class="menu-item active" href="#"><span class="menu-icon">🏠</span><span>总览仪表盘</span></a>
+          <a class="menu-item" href="#"><span class="menu-icon">🛡️</span><span>风险巡检</span></a>
+          <a class="menu-item" href="#"><span class="menu-icon">📢</span><span>事件预警</span></a>
+          <a class="menu-item" href="#"><span class="menu-icon">🎓</span><span>培训管理</span></a>
+          <a class="menu-item" href="#"><span class="menu-icon">🏥</span><span>应急资源</span></a>
+          <a class="menu-item" href="#"><span class="menu-icon">👥</span><span>社区协作</span></a>
+          <a class="menu-item" href="#"><span class="menu-icon">📊</span><span>数据报表</span></a>
+          <a class="menu-item" href="#"><span class="menu-icon">⚙️</span><span>系统设置</span></a>
+        </nav>
+      </aside>
 
-      <main>
-        <section id="home" class="page active" data-page="首页">
-          <article class="hero-card card">
-            <div>
-              <p class="tag">今日安全指数</p>
-              <h2 id="safetyScore">89</h2>
-              <p class="small">综合天气、客流、路况、设备告警评估</p>
-            </div>
-            <div class="inline-actions">
-              <button id="refreshScore" class="btn btn-primary">刷新评估</button>
-              <button id="drillBtn" class="btn btn-ghost">发起演练</button>
-            </div>
-          </article>
-
-          <div class="grid cards-2">
-            <article class="card feature-card">
-              <h3>游客实时分布</h3>
-              <p id="visitorCount">南岭古村 536 人</p>
-              <div class="meter"><span id="visitorMeter" style="width: 78%"></span></div>
-              <button class="btn btn-text" data-action="open-page" data-target="risk">查看区域风险</button>
-            </article>
-            <article class="card feature-card">
-              <h3>当日事件</h3>
-              <p id="eventStats"><strong>4</strong> 起（已处置 3 起）</p>
-              <div class="meter warning"><span id="eventMeter" style="width: 43%"></span></div>
-              <button class="btn btn-text" data-action="open-page" data-target="dispatch">进入应急指挥</button>
-            </article>
+      <div class="main-panel">
+        <header class="topbar glass">
+          <div class="search-shell">
+            <span class="search-icon">🔍</span>
+            <input type="search" placeholder="搜索村镇、事件、设备或任务..." aria-label="搜索" />
           </div>
-
-          <article class="card">
-            <div class="title-row">
-              <h3>景区广播与提示</h3>
-              <button id="broadcastBtn" class="btn btn-ghost">新增广播</button>
-            </div>
-            <ul id="noticeList" class="list"></ul>
-          </article>
-        </section>
-
-        <section id="risk" class="page" data-page="风险地图">
-          <article class="card">
-            <div class="title-row">
-              <h2>风险热力图（模拟）</h2>
-              <div class="inline-actions">
-                <select id="mapFilter">
-                  <option value="all">全部风险</option>
-                  <option value="traffic">交通安全</option>
-                  <option value="weather">天气灾害</option>
-                  <option value="fire">消防隐患</option>
-                </select>
-                <button id="addRiskBtn" class="btn btn-ghost">新增风险点</button>
-              </div>
-            </div>
-            <div class="map-canvas" id="mapCanvas"></div>
-          </article>
-          <article class="card">
-            <h3>风险清单</h3>
-            <div id="riskList" class="stack"></div>
-          </article>
-        </section>
-
-        <section id="report" class="page" data-page="安全上报">
-          <article class="card">
-            <h2>一键安全上报</h2>
-            <p class="small">游客、商户、管理员均可提交事件，模拟全流程。</p>
-            <form id="reportForm" class="stack">
-              <label>事件类型
-                <select name="type" required>
-                  <option value="游客受伤">游客受伤</option>
-                  <option value="道路隐患">道路隐患</option>
-                  <option value="消防故障">消防故障</option>
-                  <option value="人员走失">人员走失</option>
-                </select>
-              </label>
-              <label>发生地点<input name="location" type="text" required /></label>
-              <label>详细描述<textarea name="description" rows="4" required></textarea></label>
-              <div class="inline-actions">
-                <button class="btn btn-primary" type="submit">提交上报</button>
-                <button id="simulateReportBtn" class="btn btn-ghost" type="button">模拟自动告警</button>
-              </div>
-            </form>
-          </article>
-
-          <article class="card">
-            <div class="title-row">
-              <h3>上报记录</h3>
-              <button id="clearReportsBtn" class="btn btn-ghost">清空记录</button>
-            </div>
-            <ul id="reportTimeline" class="timeline"></ul>
-          </article>
-        </section>
-
-        <section id="dispatch" class="page" data-page="应急指挥">
-          <article class="grid cards-3">
-            <div class="card feature-card"><h3>在岗巡检员</h3><p id="staffCount"><strong>18</strong> 人</p></div>
-            <div class="card feature-card"><h3>可调用车辆</h3><p id="vehicleCount"><strong>6</strong> 台</p></div>
-            <div class="card feature-card"><h3>医疗联动点</h3><p><strong>3</strong> 处</p></div>
-          </article>
-          <article class="card">
-            <h3>应急流程看板</h3>
-            <ol class="steps" id="dispatchSteps"></ol>
-            <div class="inline-actions">
-              <button id="nextStep" class="btn btn-primary">推进流程</button>
-              <button id="resetStep" class="btn btn-ghost">重置流程</button>
-              <button id="autoAllocate" class="btn btn-ghost">自动调度</button>
-            </div>
-            <p id="dispatchLog" class="small"></p>
-          </article>
-        </section>
-
-        <section id="profile" class="page" data-page="我的">
-          <article class="card profile">
-            <div class="avatar">安</div>
+          <div class="profile-chip">
+            <span class="online-dot"></span>
+            <img src="https://api.dicebear.com/7.x/initials/svg?seed=%E5%AE%89%E5%86%9C" alt="用户头像" />
             <div>
-              <h2>安南村管理员</h2>
-              <p class="small">角色：乡村应急联络员</p>
+              <strong>管理员 · 陈宇</strong>
+              <p>超级管理员</p>
             </div>
-          </article>
-          <article class="card">
-            <h3>快捷入口</h3>
-            <div class="grid cards-2">
-              <button class="btn btn-ghost" data-action="quick" data-key="training">安全培训</button>
-              <button class="btn btn-ghost" data-action="quick" data-key="inspection">设备巡检</button>
-              <button class="btn btn-ghost" data-action="quick" data-key="template">通知模板</button>
-              <button class="btn btn-ghost" data-action="quick" data-key="drill">演练记录</button>
-            </div>
-            <div id="quickPanel" class="quick-panel"></div>
-          </article>
-        </section>
-      </main>
+          </div>
+        </header>
 
-      <nav class="tab-bar">
-        <button class="tab active" data-target="home">首页</button>
-        <button class="tab" data-target="risk">风险地图</button>
-        <button class="tab" data-target="report">安全上报</button>
-        <button class="tab" data-target="dispatch">应急指挥</button>
-        <button class="tab" data-target="profile">我的</button>
-      </nav>
+        <main class="content">
+          <section class="hero-card glass">
+            <div class="hero-content">
+              <p class="hero-kicker">今日乡村安全态势</p>
+              <h1>乡村安全智能管理中心</h1>
+              <p>覆盖 12 个乡镇、286 个重点点位，今日风险事件处理率 93.6%，系统运行稳定。</p>
+            </div>
+            <div class="hero-illustration" aria-hidden="true">
+              <div class="hill"></div>
+              <div class="hill"></div>
+              <div class="farm"></div>
+              <div class="signal"></div>
+            </div>
+          </section>
+
+          <section class="quick-actions">
+            <article class="action-card">
+              <div class="icon-wrap">🚨</div>
+              <h3>风险上报中心</h3>
+              <p>快速记录并分配乡村安全事件，支持图片与定位联动。</p>
+            </article>
+            <article class="action-card">
+              <div class="icon-wrap">🧯</div>
+              <h3>消防巡检任务</h3>
+              <p>按网格推送巡检计划，实时追踪消防设施状态与整改闭环。</p>
+            </article>
+            <article class="action-card">
+              <div class="icon-wrap">📹</div>
+              <h3>视频监测看板</h3>
+              <p>汇总重点区域摄像头预警，自动识别聚集与烟火异常。</p>
+            </article>
+            <article class="action-card">
+              <div class="icon-wrap">📦</div>
+              <h3>应急物资调度</h3>
+              <p>管理急救包、灭火器与救援设备库存，支持一键调拨。</p>
+            </article>
+            <article class="action-card">
+              <div class="icon-wrap">🧑‍🏫</div>
+              <h3>安全培训计划</h3>
+              <p>发布农户培训课程与考核任务，提升基层安全能力。</p>
+            </article>
+            <article class="action-card">
+              <div class="icon-wrap">🤝</div>
+              <h3>专家协同响应</h3>
+              <p>连接医疗、消防与农业专家，实现跨部门在线会商。</p>
+            </article>
+          </section>
+        </main>
+      </div>
     </div>
-
-    <dialog id="toast"></dialog>
-    <dialog id="modal"></dialog>
-    <script type="module" src="js/main.js"></script>
   </body>
 </html>
