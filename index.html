@@ -3,158 +3,94 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>安农帮 · 乡村安全服务平台</title>
-    <link rel="stylesheet" href="styles/base.css" />
-    <link rel="stylesheet" href="styles/layout.css" />
-    <link rel="stylesheet" href="styles/components.css" />
-    <link rel="stylesheet" href="styles/pages.css" />
+    <title>安农帮 · 乡村安全管理后台</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="app-shell">
-      <header class="top-nav card sticky">
-        <div>
-          <h1>安农帮</h1>
-          <p class="small">乡村安全能力提升平台</p>
-        </div>
-        <div class="search-wrap">
-          <input id="homeSearch" placeholder="搜索农业服务..." />
-          <button id="voiceBtn" class="btn btn-ghost icon-btn" aria-label="语音输入">🎤</button>
-        </div>
-      </header>
+    <div class="dashboard-layout">
+      <aside class="sidebar">
+        <div class="logo">安农帮</div>
+        <p class="logo-subtitle">Rural Safety Admin</p>
+        <nav class="menu" aria-label="主导航">
+          <a class="menu-item active" href="#"><span class="menu-icon">🏠</span><span>总览仪表盘</span></a>
+          <a class="menu-item" href="#"><span class="menu-icon">🛡️</span><span>风险巡检</span></a>
+          <a class="menu-item" href="#"><span class="menu-icon">📢</span><span>事件预警</span></a>
+          <a class="menu-item" href="#"><span class="menu-icon">🎓</span><span>培训管理</span></a>
+          <a class="menu-item" href="#"><span class="menu-icon">🏥</span><span>应急资源</span></a>
+          <a class="menu-item" href="#"><span class="menu-icon">👥</span><span>社区协作</span></a>
+          <a class="menu-item" href="#"><span class="menu-icon">📊</span><span>数据报表</span></a>
+          <a class="menu-item" href="#"><span class="menu-icon">⚙️</span><span>系统设置</span></a>
+        </nav>
+      </aside>
 
-      <main>
-        <section id="home" class="page active">
-          <article class="card banner" id="homeBanner"></article>
-          <article class="card">
-            <h3>快捷功能</h3>
-            <div id="featureGrid" class="grid grid-3"></div>
-          </article>
-        </section>
-
-        <section id="category" class="page">
-          <article class="card">
-            <h2 id="subTitle">分类中心</h2>
-            <p class="small">请选择功能模块</p>
-            <div class="grid grid-2 mt12">
-              <button class="btn btn-ghost" data-open="micro">微课学习</button>
-              <button class="btn btn-ghost" data-open="rental">设备租赁</button>
-              <button class="btn btn-ghost" data-open="exam">模拟考核</button>
-              <button class="btn btn-ghost" data-open="consult">专家咨询</button>
+      <div class="main-panel">
+        <header class="topbar glass">
+          <div class="search-shell">
+            <span class="search-icon">🔍</span>
+            <input type="search" placeholder="搜索村镇、事件、设备或任务..." aria-label="搜索" />
+          </div>
+          <div class="profile-chip">
+            <span class="online-dot"></span>
+            <img src="https://api.dicebear.com/7.x/initials/svg?seed=%E5%AE%89%E5%86%9C" alt="用户头像" />
+            <div>
+              <strong>管理员 · 陈宇</strong>
+              <p>超级管理员</p>
             </div>
-          </article>
+          </div>
+        </header>
 
-          <article id="micro" class="card subview hidden">
-            <div class="title-row"><h3>微课学习</h3><button class="btn btn-text" data-close>返回</button></div>
-            <div id="microTags" class="tag-row"></div>
-            <div class="card progress-card">
-              <p>本周已学习 <strong id="microDone">5/8</strong> 节，达成 <strong id="microRate">62%</strong>，连续学习3天</p>
-              <div class="progress-line"><span id="microBar" style="width:62%"></span></div>
+        <main class="content">
+          <section class="hero-card glass">
+            <div class="hero-content">
+              <p class="hero-kicker">今日乡村安全态势</p>
+              <h1>乡村安全智能管理中心</h1>
+              <p>覆盖 12 个乡镇、286 个重点点位，今日风险事件处理率 93.6%，系统运行稳定。</p>
             </div>
-            <div id="courseList" class="stack"></div>
-            <button id="continueCourse" class="float-action">继续学习上次课程（上次学到：民宿夜间电路短路处置 · 第3步）</button>
-          </article>
+            <div class="hero-illustration" aria-hidden="true">
+              <div class="hill"></div>
+              <div class="hill"></div>
+              <div class="farm"></div>
+              <div class="signal"></div>
+            </div>
+          </section>
 
-          <article id="rental" class="card subview hidden">
-            <div class="title-row"><h3>设备租赁</h3><button class="btn btn-text" data-close>返回</button></div>
-            <div class="tag-row" id="rentalTags"></div>
-            <article class="card banner mini">旺季推荐设备组合：智能CPR训练仪 + 海姆立克马甲 + 急救包</article>
-            <div id="rentalList" class="stack"></div>
-            <article class="card">
-              <h4>快速配置租赁方案</h4>
-              <label>租赁时长 <strong id="rentDays">14</strong> 天</label>
-              <input id="rentSlider" type="range" min="1" max="30" value="14" />
-              <p class="small">预估价格：<strong id="rentPrice">¥2786</strong></p>
+          <section class="quick-actions">
+            <article class="action-card">
+              <div class="icon-wrap">🚨</div>
+              <h3>风险上报中心</h3>
+              <p>快速记录并分配乡村安全事件，支持图片与定位联动。</p>
             </article>
-            <article class="card after-sale">租赁中设备：2 台 ｜ 售后工单：1 条（处理中）</article>
-          </article>
-
-          <article id="exam" class="card subview hidden">
-            <div class="title-row"><h3>模拟考核</h3><button class="btn btn-text" data-close>返回</button></div>
-            <ol class="stepper" id="examSteps"></ol>
-            <article class="card">
-              <p>本次考核：农家乐急救与用电安全</p>
-              <p class="small">时长30分钟 ｜ 及格80分</p>
-              <p class="mt8">理论测试：已完成 <strong id="theoryDone">12/20</strong> ｜ 预估78分</p>
-              <div class="progress-line"><span id="theoryBar" style="width:60%"></span></div>
-              <div class="inline-actions mt8">
-                <button id="continueExam" class="btn btn-primary">继续答题</button>
-                <button id="uploadDemo" class="btn btn-ghost">上传实操视频</button>
-              </div>
+            <article class="action-card">
+              <div class="icon-wrap">🧯</div>
+              <h3>消防巡检任务</h3>
+              <p>按网格推送巡检计划，实时追踪消防设施状态与整改闭环。</p>
             </article>
-            <article class="card">
-              <p>历史记录：急救基础考核 ｜ 92分 ｜ 已通过</p>
-              <button id="showCert" class="btn btn-ghost mt8">查看电子证书</button>
+            <article class="action-card">
+              <div class="icon-wrap">📹</div>
+              <h3>视频监测看板</h3>
+              <p>汇总重点区域摄像头预警，自动识别聚集与烟火异常。</p>
             </article>
-          </article>
-
-          <article id="consult" class="card subview hidden">
-            <div class="title-row"><h3>专家咨询</h3><button class="btn btn-text" data-close>返回</button></div>
-            <div class="tabs" id="consultTabs">
-              <button class="tab-btn active" data-tab="qa">快速问答</button>
-              <button class="tab-btn" data-tab="video">视频会诊</button>
-              <button class="tab-btn" data-tab="mine">我的咨询</button>
-            </div>
-            <article class="card banner mini">乡村安全专家团 7x24小时在线</article>
-            <div class="grid grid-3">
-              <button class="btn btn-ghost consult-fast">急救与创伤</button>
-              <button class="btn btn-ghost consult-fast">用电与消防</button>
-              <button class="btn btn-ghost consult-fast">食品与卫生</button>
-            </div>
-            <textarea id="consultInput" class="mt8" rows="3" placeholder="请简要描述你的问题...（如百人自助餐如何设计急救预案）"></textarea>
-            <div id="consultList" class="stack mt8"></div>
-            <div id="expertList" class="stack mt8"></div>
-          </article>
-        </section>
-
-        <section id="action" class="page">
-          <article class="card">
-            <h3>快速发布/操作</h3>
-            <p class="small">你可以发布社区动态、提交安全事件、发起培训通知。</p>
-            <div class="grid grid-2 mt12">
-              <button class="btn btn-primary" id="publishPost">发布社区动态</button>
-              <button class="btn btn-ghost" id="publishIncident">提交安全事件</button>
-            </div>
-          </article>
-        </section>
-
-        <section id="message" class="page">
-          <article class="card"><h3>消息中心</h3><div id="messageList" class="stack mt8"></div></article>
-        </section>
-
-        <section id="profile" class="page">
-          <article class="card glass profile-head">
-            <h3>叶佳丽</h3>
-            <p class="small">账号 138****5620 ｜ 认证从业者 ｜ 安全成长值 1280</p>
-            <div class="grid grid-3 mt12">
-              <div><strong>26</strong><p class="small">已学课程</p></div>
-              <div><strong>4</strong><p class="small">通过考核</p></div>
-              <div><strong>5</strong><p class="small">连续学习</p></div>
-            </div>
-          </article>
-          <article class="card">
-            <h4>安全能力评分</h4>
-            <div class="gauge" style="--value:86"><span>86/100</span></div>
-          </article>
-          <article class="card">
-            <div class="grid grid-3" id="profileGrid"></div>
-          </article>
-          <article class="card"><ul class="list"><li>我的收藏</li><li>常用场景</li><li>团队管理</li><li>账号安全</li></ul></article>
-        </section>
-      </main>
-
-      <button id="sosBtn" class="sos-btn">🆘 紧急联系</button>
-
-      <nav class="tab-bar">
-        <button class="tab active" data-target="home">首页</button>
-        <button class="tab" data-target="category">分类</button>
-        <button class="tab plus" data-target="action">＋</button>
-        <button class="tab" data-target="message">消息</button>
-        <button class="tab" data-target="profile">我的</button>
-      </nav>
+            <article class="action-card">
+              <div class="icon-wrap">📦</div>
+              <h3>应急物资调度</h3>
+              <p>管理急救包、灭火器与救援设备库存，支持一键调拨。</p>
+            </article>
+            <article class="action-card">
+              <div class="icon-wrap">🧑‍🏫</div>
+              <h3>安全培训计划</h3>
+              <p>发布农户培训课程与考核任务，提升基层安全能力。</p>
+            </article>
+            <article class="action-card">
+              <div class="icon-wrap">🤝</div>
+              <h3>专家协同响应</h3>
+              <p>连接医疗、消防与农业专家，实现跨部门在线会商。</p>
+            </article>
+          </section>
+        </main>
+      </div>
     </div>
-
-    <dialog id="toast"></dialog>
-    <dialog id="modal"></dialog>
-    <script type="module" src="js/main.js"></script>
   </body>
 </html>
