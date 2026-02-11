@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>安农帮 · 乡村安全服务平台</title>
+    <link rel="stylesheet" href="styles/base.css" />
+    <link rel="stylesheet" href="styles/layout.css" />
+    <link rel="stylesheet" href="styles/components.css" />
+    <link rel="stylesheet" href="styles/pages.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="top-nav card sticky">
+        <div>
+          <h1>安农帮</h1>
+          <p class="small">乡村安全能力提升平台</p>
+        </div>
+        <div class="search-wrap">
+          <input id="homeSearch" placeholder="搜索农业服务..." />
+          <button id="voiceBtn" class="btn btn-ghost icon-btn" aria-label="语音输入">🎤</button>
+        </div>
+      </header>
+
+      <main>
+        <section id="home" class="page active">
+          <article class="card banner" id="homeBanner"></article>
+          <article class="card">
+            <h3>快捷功能</h3>
+            <div id="featureGrid" class="grid grid-3"></div>
+          </article>
+        </section>
+
+        <section id="category" class="page">
+          <article class="card">
+            <h2 id="subTitle">分类中心</h2>
+            <p class="small">请选择功能模块</p>
+            <div class="grid grid-2 mt12">
+              <button class="btn btn-ghost" data-open="micro">微课学习</button>
+              <button class="btn btn-ghost" data-open="rental">设备租赁</button>
+              <button class="btn btn-ghost" data-open="exam">模拟考核</button>
+              <button class="btn btn-ghost" data-open="consult">专家咨询</button>
+            </div>
+          </article>
+
+          <article id="micro" class="card subview hidden">
+            <div class="title-row"><h3>微课学习</h3><button class="btn btn-text" data-close>返回</button></div>
+            <div id="microTags" class="tag-row"></div>
+            <div class="card progress-card">
+              <p>本周已学习 <strong id="microDone">5/8</strong> 节，达成 <strong id="microRate">62%</strong>，连续学习3天</p>
+              <div class="progress-line"><span id="microBar" style="width:62%"></span></div>
+            </div>
+            <div id="courseList" class="stack"></div>
+            <button id="continueCourse" class="float-action">继续学习上次课程（上次学到：民宿夜间电路短路处置 · 第3步）</button>
+          </article>
+
+          <article id="rental" class="card subview hidden">
+            <div class="title-row"><h3>设备租赁</h3><button class="btn btn-text" data-close>返回</button></div>
+            <div class="tag-row" id="rentalTags"></div>
+            <article class="card banner mini">旺季推荐设备组合：智能CPR训练仪 + 海姆立克马甲 + 急救包</article>
+            <div id="rentalList" class="stack"></div>
+            <article class="card">
+              <h4>快速配置租赁方案</h4>
+              <label>租赁时长 <strong id="rentDays">14</strong> 天</label>
+              <input id="rentSlider" type="range" min="1" max="30" value="14" />
+              <p class="small">预估价格：<strong id="rentPrice">¥2786</strong></p>
+            </article>
+            <article class="card after-sale">租赁中设备：2 台 ｜ 售后工单：1 条（处理中）</article>
+          </article>
+
+          <article id="exam" class="card subview hidden">
+            <div class="title-row"><h3>模拟考核</h3><button class="btn btn-text" data-close>返回</button></div>
+            <ol class="stepper" id="examSteps"></ol>
+            <article class="card">
+              <p>本次考核：农家乐急救与用电安全</p>
+              <p class="small">时长30分钟 ｜ 及格80分</p>
+              <p class="mt8">理论测试：已完成 <strong id="theoryDone">12/20</strong> ｜ 预估78分</p>
+              <div class="progress-line"><span id="theoryBar" style="width:60%"></span></div>
+              <div class="inline-actions mt8">
+                <button id="continueExam" class="btn btn-primary">继续答题</button>
+                <button id="uploadDemo" class="btn btn-ghost">上传实操视频</button>
+              </div>
+            </article>
+            <article class="card">
+              <p>历史记录：急救基础考核 ｜ 92分 ｜ 已通过</p>
+              <button id="showCert" class="btn btn-ghost mt8">查看电子证书</button>
+            </article>
+          </article>
+
+          <article id="consult" class="card subview hidden">
+            <div class="title-row"><h3>专家咨询</h3><button class="btn btn-text" data-close>返回</button></div>
+            <div class="tabs" id="consultTabs">
+              <button class="tab-btn active" data-tab="qa">快速问答</button>
+              <button class="tab-btn" data-tab="video">视频会诊</button>
+              <button class="tab-btn" data-tab="mine">我的咨询</button>
+            </div>
+            <article class="card banner mini">乡村安全专家团 7x24小时在线</article>
+            <div class="grid grid-3">
+              <button class="btn btn-ghost consult-fast">急救与创伤</button>
+              <button class="btn btn-ghost consult-fast">用电与消防</button>
+              <button class="btn btn-ghost consult-fast">食品与卫生</button>
+            </div>
+            <textarea id="consultInput" class="mt8" rows="3" placeholder="请简要描述你的问题...（如百人自助餐如何设计急救预案）"></textarea>
+            <div id="consultList" class="stack mt8"></div>
+            <div id="expertList" class="stack mt8"></div>
+          </article>
+        </section>
+
+        <section id="action" class="page">
+          <article class="card">
+            <h3>快速发布/操作</h3>
+            <p class="small">你可以发布社区动态、提交安全事件、发起培训通知。</p>
+            <div class="grid grid-2 mt12">
+              <button class="btn btn-primary" id="publishPost">发布社区动态</button>
+              <button class="btn btn-ghost" id="publishIncident">提交安全事件</button>
+            </div>
+          </article>
+        </section>
+
+        <section id="message" class="page">
+          <article class="card"><h3>消息中心</h3><div id="messageList" class="stack mt8"></div></article>
+        </section>
+
+        <section id="profile" class="page">
+          <article class="card glass profile-head">
+            <h3>叶佳丽</h3>
+            <p class="small">账号 138****5620 ｜ 认证从业者 ｜ 安全成长值 1280</p>
+            <div class="grid grid-3 mt12">
+              <div><strong>26</strong><p class="small">已学课程</p></div>
+              <div><strong>4</strong><p class="small">通过考核</p></div>
+              <div><strong>5</strong><p class="small">连续学习</p></div>
+            </div>
+          </article>
+          <article class="card">
+            <h4>安全能力评分</h4>
+            <div class="gauge" style="--value:86"><span>86/100</span></div>
+          </article>
+          <article class="card">
+            <div class="grid grid-3" id="profileGrid"></div>
+          </article>
+          <article class="card"><ul class="list"><li>我的收藏</li><li>常用场景</li><li>团队管理</li><li>账号安全</li></ul></article>
+        </section>
+      </main>
+
+      <button id="sosBtn" class="sos-btn">🆘 紧急联系</button>
+
+      <nav class="tab-bar">
+        <button class="tab active" data-target="home">首页</button>
+        <button class="tab" data-target="category">分类</button>
+        <button class="tab plus" data-target="action">＋</button>
+        <button class="tab" data-target="message">消息</button>
+        <button class="tab" data-target="profile">我的</button>
+      </nav>
+    </div>
+
+    <dialog id="toast"></dialog>
+    <dialog id="modal"></dialog>
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>

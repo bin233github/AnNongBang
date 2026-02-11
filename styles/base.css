@@ -1,0 +1,18 @@
+:root {
+  --bg: #f4f7fb;
+  --surface: #fff;
+  --text: #1f2937;
+  --subtext: #6b7280;
+  --brand: #0f766e;
+  --brand-soft: #d9f3eb;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --border: #e5e7eb;
+  --shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "PingFang SC", "Microsoft YaHei", sans-serif; color: var(--text); background: radial-gradient(circle at top, #e7f6ef, var(--bg) 45%); }
+h1,h2,h3,h4,p{margin:0}
+.small { color: var(--subtext); font-size: 13px; }
+.mt8{margin-top:8px}.mt12{margin-top:12px}
+.hidden { display: none; }

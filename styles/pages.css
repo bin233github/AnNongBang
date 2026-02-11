@@ -1,0 +1,13 @@
+.course h4 { margin-bottom: 4px; }
+.after-sale { border-style: dashed; }
+.profile-head { position: relative; overflow: hidden; }
+.profile-head::after {
+  content: "";
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  right: -30px;
+  top: -40px;
+  background: rgba(52, 211, 153, 0.2);
+}
