@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>乡旅安 · 乡村旅游安全系统</title>
+    <link rel="stylesheet" href="styles/base.css" />
+    <link rel="stylesheet" href="styles/layout.css" />
+    <link rel="stylesheet" href="styles/components.css" />
+    <link rel="stylesheet" href="styles/pages.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="top-bar card">
+        <div>
+          <p class="eyebrow">智慧文旅 · 安全先行</p>
+          <h1>乡旅安</h1>
+          <p class="subtitle">乡村旅游安全综合指挥平台（前端完整流程演示）</p>
+        </div>
+        <div class="header-actions">
+          <button id="themeToggle" class="btn btn-ghost">夜间模式</button>
+          <button id="notifyBtn" class="btn btn-ghost">通知中心</button>
+        </div>
+      </header>
+
+      <main>
+        <section id="home" class="page active" data-page="首页">
+          <article class="hero-card card">
+            <div>
+              <p class="tag">今日安全指数</p>
+              <h2 id="safetyScore">89</h2>
+              <p class="small">综合天气、客流、路况、设备告警评估</p>
+            </div>
+            <div class="inline-actions">
+              <button id="refreshScore" class="btn btn-primary">刷新评估</button>
+              <button id="drillBtn" class="btn btn-ghost">发起演练</button>
+            </div>
+          </article>
+
+          <div class="grid cards-2">
+            <article class="card feature-card">
+              <h3>游客实时分布</h3>
+              <p id="visitorCount">南岭古村 536 人</p>
+              <div class="meter"><span id="visitorMeter" style="width: 78%"></span></div>
+              <button class="btn btn-text" data-action="open-page" data-target="risk">查看区域风险</button>
+            </article>
+            <article class="card feature-card">
+              <h3>当日事件</h3>
+              <p id="eventStats"><strong>4</strong> 起（已处置 3 起）</p>
+              <div class="meter warning"><span id="eventMeter" style="width: 43%"></span></div>
+              <button class="btn btn-text" data-action="open-page" data-target="dispatch">进入应急指挥</button>
+            </article>
+          </div>
+
+          <article class="card">
+            <div class="title-row">
+              <h3>景区广播与提示</h3>
+              <button id="broadcastBtn" class="btn btn-ghost">新增广播</button>
+            </div>
+            <ul id="noticeList" class="list"></ul>
+          </article>
+        </section>
+
+        <section id="risk" class="page" data-page="风险地图">
+          <article class="card">
+            <div class="title-row">
+              <h2>风险热力图（模拟）</h2>
+              <div class="inline-actions">
+                <select id="mapFilter">
+                  <option value="all">全部风险</option>
+                  <option value="traffic">交通安全</option>
+                  <option value="weather">天气灾害</option>
+                  <option value="fire">消防隐患</option>
+                </select>
+                <button id="addRiskBtn" class="btn btn-ghost">新增风险点</button>
+              </div>
+            </div>
+            <div class="map-canvas" id="mapCanvas"></div>
+          </article>
+          <article class="card">
+            <h3>风险清单</h3>
+            <div id="riskList" class="stack"></div>
+          </article>
+        </section>
+
+        <section id="report" class="page" data-page="安全上报">
+          <article class="card">
+            <h2>一键安全上报</h2>
+            <p class="small">游客、商户、管理员均可提交事件，模拟全流程。</p>
+            <form id="reportForm" class="stack">
+              <label>事件类型
+                <select name="type" required>
+                  <option value="游客受伤">游客受伤</option>
+                  <option value="道路隐患">道路隐患</option>
+                  <option value="消防故障">消防故障</option>
+                  <option value="人员走失">人员走失</option>
+                </select>
+              </label>
+              <label>发生地点<input name="location" type="text" required /></label>
+              <label>详细描述<textarea name="description" rows="4" required></textarea></label>
+              <div class="inline-actions">
+                <button class="btn btn-primary" type="submit">提交上报</button>
+                <button id="simulateReportBtn" class="btn btn-ghost" type="button">模拟自动告警</button>
+              </div>
+            </form>
+          </article>
+
+          <article class="card">
+            <div class="title-row">
+              <h3>上报记录</h3>
+              <button id="clearReportsBtn" class="btn btn-ghost">清空记录</button>
+            </div>
+            <ul id="reportTimeline" class="timeline"></ul>
+          </article>
+        </section>
+
+        <section id="dispatch" class="page" data-page="应急指挥">
+          <article class="grid cards-3">
+            <div class="card feature-card"><h3>在岗巡检员</h3><p id="staffCount"><strong>18</strong> 人</p></div>
+            <div class="card feature-card"><h3>可调用车辆</h3><p id="vehicleCount"><strong>6</strong> 台</p></div>
+            <div class="card feature-card"><h3>医疗联动点</h3><p><strong>3</strong> 处</p></div>
+          </article>
+          <article class="card">
+            <h3>应急流程看板</h3>
+            <ol class="steps" id="dispatchSteps"></ol>
+            <div class="inline-actions">
+              <button id="nextStep" class="btn btn-primary">推进流程</button>
+              <button id="resetStep" class="btn btn-ghost">重置流程</button>
+              <button id="autoAllocate" class="btn btn-ghost">自动调度</button>
+            </div>
+            <p id="dispatchLog" class="small"></p>
+          </article>
+        </section>
+
+        <section id="profile" class="page" data-page="我的">
+          <article class="card profile">
+            <div class="avatar">安</div>
+            <div>
+              <h2>安南村管理员</h2>
+              <p class="small">角色：乡村应急联络员</p>
+            </div>
+          </article>
+          <article class="card">
+            <h3>快捷入口</h3>
+            <div class="grid cards-2">
+              <button class="btn btn-ghost" data-action="quick" data-key="training">安全培训</button>
+              <button class="btn btn-ghost" data-action="quick" data-key="inspection">设备巡检</button>
+              <button class="btn btn-ghost" data-action="quick" data-key="template">通知模板</button>
+              <button class="btn btn-ghost" data-action="quick" data-key="drill">演练记录</button>
+            </div>
+            <div id="quickPanel" class="quick-panel"></div>
+          </article>
+        </section>
+      </main>
+
+      <nav class="tab-bar">
+        <button class="tab active" data-target="home">首页</button>
+        <button class="tab" data-target="risk">风险地图</button>
+        <button class="tab" data-target="report">安全上报</button>
+        <button class="tab" data-target="dispatch">应急指挥</button>
+        <button class="tab" data-target="profile">我的</button>
+      </nav>
+    </div>
+
+    <dialog id="toast"></dialog>
+    <dialog id="modal"></dialog>
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
